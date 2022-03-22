@@ -14,6 +14,9 @@ Infos Membre
 <div class='h2'>
   {{ $un_membre->adresse }}
 </div>
+<p>
+  {{ $membre_description->description }}
+</p>
 @stop
 @section('pied_page')
 LicenceProServiceTic 2022

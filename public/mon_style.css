@@ -38,17 +38,18 @@ body {
 }
 
 .h1 {
-	text-align:center;
 	font-size: 18pt;
 	font-family:'Lucida Console';
 	color:tomato;
 }
 
 .h2 {
-	text-align:center;
 	font-size: 16pt;
 	font-family:'Impact';
 	color:coral;
+}
+
+p {
   margin-bottom: 10px;
 }
 

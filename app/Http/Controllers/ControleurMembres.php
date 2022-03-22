@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 // Obligatoire pour avoir accès au modèle
 use App\Models\Membre;
+use App\Models\Description;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ControleurMembres extends Controller
@@ -12,9 +13,10 @@ class ControleurMembres extends Controller
   protected $les_membres;
   protected $soumissions;
 
-  public function __construct(Membre $membres, Request $requetes) {
+  public function __construct(Membre $membres,Description $description,Request $requetes) {
     $this->les_membres = $membres;
     $this->soumissions = $requetes;
+    $this->les_description = $description;
   }
 
   public function index() {
@@ -25,7 +27,8 @@ class ControleurMembres extends Controller
   public function afficher($numero) {
     try {
       $un_membre = membre::findOrFail($numero);
-      return view('pages_site/membre', compact('un_membre'));
+      $membre_description = description::findOrFail($numero);
+      return view('pages_site/membre', compact('un_membre', 'membre_description'));
     } catch(ModelNotFoundException $e) {
       return view('pages_site/erreur');
     }
@@ -46,6 +49,7 @@ class ControleurMembres extends Controller
 
   public function editer($numero) {
     $un_membre = $this->les_membres->find($numero);
+    $membre_description = $this->les_description->find($numero);
     if (isset($un_membre)) {
       return view('pages_site/edition', compact('un_membre'));
     } else {
